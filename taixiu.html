@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài Xỉu Online</title>
+    <link rel="icon" href="./tai-xiu-online-la-gi-tinhay_org-1-removebg-preview.png">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .dice {
+            font-size: 50px;
+            margin: 10px;
+        }
+        .result {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn-tai {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-xiu {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.8;
+        }
+        .win-link {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tài Xỉu Trực Tuyến</h1>
+        <p>Chọn cược của bạn:</p>
+        <button class="btn btn-tai" onclick="playGame('tai')">Tài (11-17)</button>
+        <button class="btn btn-xiu" onclick="playGame('xiu')">Xỉu (4-10)</button>
+        <div id="diceResult" class="dice">🎲 🎲 🎲</div>
+        <div id="total"></div>
+        <div id="gameResult" class="result"></div>
+        <div id="winLink" class="win-link">
+            <a href="https://images2.thanhnien.vn/zoom/700_438/Uploaded/congnguyen/2019_09_09/huanhoahong-1_UGWW.jpg" target="_blank" style="color: #28a745;">Nhấn vào đây để nhận lộc!</a>
+        </div>
+    </div>
+    
+    <script>
+        function rollDice() {
+            return Math.floor(Math.random() * 6) + 1;
+        }
+        
+        function playGame(choice) {
+            let dice1 = rollDice();
+            let dice2 = rollDice();
+            let dice3 = rollDice();
+            let total = dice1 + dice2 + dice3;
+            let result = (total >= 4 && total <= 10) ? 'xiu' : 'tai';
+            
+            document.getElementById('diceResult').innerHTML = `🎲 ${dice1} 🎲 ${dice2} 🎲 ${dice3}`;
+            document.getElementById('total').innerText = `Tổng: ${total}`;
+            let winLink = document.getElementById('winLink');
+            
+            if (choice === result) {
+                document.getElementById('gameResult').innerText = "Chúc mừng! Bạn đã thắng.";
+                document.getElementById('gameResult').style.color = "#28a745";
+                winLink.style.display = "block";
+            } else {
+                document.getElementById('gameResult').innerText = "99% con bạc dừng lại trước khi thắng! Đừng bỏ cuộc bạn nhé.";
+                document.getElementById('gameResult').style.color = "#dc3545";
+                winLink.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
